@@ -1,15 +1,23 @@
 {
   "name": "ros_msg_utils",
   "version": "1.0.0",
-  "description": "helper files for ros messages",
+  "description": "Provides Helper functions for ros messages",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/directory.js"
   },
   "keywords": [
     "ros",
-    "msg"
+    "messages"
   ],
   "author": "chris smith",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RethinkRobotics-opensource/rosnodejs"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
 }
