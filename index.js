@@ -1,5 +1,11 @@
+const MessageCache = require('./lib/message_cache.js');
+
 module.exports = {
-  Find: require('./lib/find.js'),
   Serialize: require('./lib/base_serialize.js'),
-  Deserialize: require('./lib/base_deserialize.js')
-}
+  Deserialize: require('./lib/base_deserialize.js'),
+  Find: MessageCache.Find,
+  CMAKE_PREFIX_PATH: MessageCache.CMAKE_PREFIX_PATH,
+  CMAKE_PATHS: MessageCache.CMAKE_PATHS,
+  MESSAGE_PATH: MessageCache.MESSAGE_PATH,
+  packageMap: MessageCache.packageMap
+};
