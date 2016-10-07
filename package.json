@@ -1,6 +1,6 @@
 {
   "name": "ros_msg_utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides Helper functions for ros messages",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/RethinkRobotics-opensource/rosnodejs"
+    "url": "git://github.com/RethinkRobotics-opensource/ros_msg_utils"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -496,8 +496,8 @@ describe('Serialization Tests', () => {
   });
 
   it('String', () => {
-    const buffer = Buffer.alloc(20);
-    const compBuf = Buffer.alloc(20);
+    const buffer = Buffer.alloc(39);
+    const compBuf = Buffer.alloc(39);
     expect(serialize.string('hi', buffer, 0)).to.equal(6);
     compBuf.writeUInt32LE(2);
     compBuf.write('hi', 4);
@@ -510,21 +510,27 @@ describe('Serialization Tests', () => {
     compBuf.writeUInt32LE(1, 15);
     compBuf.write('1', 19);
     expect(buffer.equals(compBuf)).to.be.true;
+    expect(serialize.string('こんにちは', buffer, 20)).to.equal(39);
+    compBuf.writeUInt32LE(15, 20);
+    compBuf.write('こんにちは', 24);
+    expect(buffer.equals(compBuf)).to.be.true;
   });
 
   it('String Array', () => {
-    const buffer = Buffer.alloc(28);
-    const compBuf = Buffer.alloc(28);
-    expect(serialize.Array.string(['hi', 'there'], buffer, 0, -1)).to.equal(19);
-    compBuf.writeUInt32LE(2);
+    const buffer = Buffer.alloc(47);
+    const compBuf = Buffer.alloc(47);
+    expect(serialize.Array.string(['hi', 'there', 'こんにちは'], buffer, 0, -1)).to.equal(38);
+    compBuf.writeUInt32LE(3);
     compBuf.writeUInt32LE(2, 4);
     compBuf.write('hi', 8);
     compBuf.writeUInt32LE(5, 10);
     compBuf.write('there', 14);
+    compBuf.writeUInt32LE(15, 19);
+    compBuf.write('こんにちは', 23);
     expect(buffer.equals(compBuf)).to.be.true;
-    expect(serialize.Array.string(['9'], buffer, 19, 1)).to.equal(24);
-    compBuf.writeUInt32LE(1, 19);
-    compBuf.write('9', 23);
+    expect(serialize.Array.string(['9'], buffer, 38, 1)).to.equal(43);
+    compBuf.writeUInt32LE(1, 38);
+    compBuf.write('9', 42);
     expect(buffer.equals(compBuf)).to.be.true;
   });
 });
