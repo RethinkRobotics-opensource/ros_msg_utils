@@ -550,26 +550,28 @@ describe('Deserialization Tests', () => {
   });
 
   it('String', () => {
-    const buf = Buffer.alloc(37);
-    serialize.Array.string(["Hello","World","Strings","here"], buf, 0, 4);
+    const buf = Buffer.alloc(47);
+    serialize.Array.string(["Hello","World","一番","Strings","here"], buf, 0, 5);
 
     const bufferOffset = [0];
     expect(deserialize.string(buf, bufferOffset)).to.equal("Hello");
     expect(bufferOffset[0]).to.equal(9);
     expect(deserialize.string(buf, bufferOffset)).to.equal("World");
     expect(bufferOffset[0]).to.equal(18);
+    expect(deserialize.string(buf, bufferOffset)).to.equal("一番");
+    expect(bufferOffset[0]).to.equal(28);
     expect(deserialize.string(buf, bufferOffset)).to.equal("Strings");
-    expect(bufferOffset[0]).to.equal(29);
+    expect(bufferOffset[0]).to.equal(39);
     expect(deserialize.string(buf, bufferOffset)).to.equal("here");
-    expect(bufferOffset[0]).to.equal(37);
+    expect(bufferOffset[0]).to.equal(47);
   });
 
   it('String Array', () => {
-    const buf = Buffer.alloc(62);
-    const strings = ["Hello","World","Strings","here","019283dlakjsd"];
+    const buf = Buffer.alloc(72);
+    const strings = ["Hello","World","一番","Strings","here","019283dlakjsd"];
     serialize.Array.string(strings.slice(0,2), buf, 0, 2);
-    serialize.Array.string(strings.slice(2,4), buf, 18, -1);
-    serialize.Array.string(strings.slice(4,5), buf, 41, -1);
+    serialize.Array.string(strings.slice(2,5), buf, 18, -1);
+    serialize.Array.string(strings.slice(5,6), buf, 51, -1);
 
     const bufferOffset = [0];
     let arr = deserialize.Array.string(buf, bufferOffset, 2);
@@ -579,14 +581,15 @@ describe('Deserialization Tests', () => {
     expect(arr[1]).to.equal(strings[1]);
 
     arr = deserialize.Array.string(buf, bufferOffset, -1);
-    expect(bufferOffset[0]).to.equal(41);
-    expect(arr.length).to.equal(2);
+    expect(bufferOffset[0]).to.equal(51);
+    expect(arr.length).to.equal(3);
     expect(arr[0]).to.equal(strings[2]);
     expect(arr[1]).to.equal(strings[3]);
+    expect(arr[2]).to.equal(strings[4]);
 
     arr = deserialize.Array.string(buf, bufferOffset, -1);
-    expect(bufferOffset[0]).to.equal(62);
+    expect(bufferOffset[0]).to.equal(72);
     expect(arr.length).to.equal(1);
-    expect(arr[0]).to.equal(strings[4]);
+    expect(arr[0]).to.equal(strings[5]);
   });
 });
