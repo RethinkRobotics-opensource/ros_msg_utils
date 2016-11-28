@@ -2,9 +2,11 @@
   "name": "ros_msg_utils",
   "version": "1.0.1",
   "description": "Provides Helper functions for ros messages",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "mocha test/directory.js"
+    "test": "mocha test/directory.js",
+    "compile": "babel --presets es2015 index.js -d dist/ && babel --presets es2015 lib -d dist/lib/",
+    "prepublish": "npm run compile"
   },
   "keywords": [
     "ros",
@@ -17,6 +19,8 @@
     "url": "git://github.com/RethinkRobotics-opensource/ros_msg_utils"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
     "chai": "^3.5.0",
     "mocha": "^3.0.2"
   }
