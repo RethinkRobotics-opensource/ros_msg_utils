@@ -36,5 +36,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-# ignore the npm distribution directory (from transpiling)
-dist/
+# ignore the git src directory (only publish the transpiled code)
+lib/
